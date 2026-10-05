@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>THREADVAULT | Fashion Enterprise Hub</title>
+<meta name="description" content="THREADVAULT is a B2B enterprise hub for fashion brands, manufacturers, suppliers and partners to discover opportunities, manage contracts and scale.">
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="shortcut icon" href="favicon.svg">
+<meta name="theme-color" content="#0b0c0d">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -809,26 +814,51 @@ section {
 .contract-card i {
     color: var(--accent);
     margin-bottom: 35px;
+    width: 32px;
+    height: 32px;
 }
 
 .contract-card h3 {
-    font-size: 17px;
-    margin-bottom: 10px;
+    font-size: 22px;
+    margin-bottom: 12px;
 }
 
 .contract-card p {
     color: var(--muted);
-    font-size: 12px;
+    font-size: 15px;
     line-height: 1.7;
 }
 
 .contract-link {
     margin-top: 25px;
     color: var(--accent-light);
-    font-size: 11px;
+    font-size: 14px;
+    font-weight: 600;
     display: inline-flex;
-    gap: 7px;
+    gap: 8px;
     align-items: center;
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(201,166,107,.35);
+    transition: .3s;
+}
+
+.contract-link:hover {
+    color: var(--white);
+    border-color: var(--accent);
+    gap: 12px;
+}
+
+.contract-link i {
+    margin: 0;
+    width: 16px;
+    height: 16px;
+    color: inherit;
+}
+
+#contracts .section-head p,
+#process .section-head p {
+    font-size: 16px;
+    max-width: 480px;
 }
 
 /* ================= DASHBOARD ================= */
@@ -879,6 +909,11 @@ section {
 .dashboard-side {
     border-right: 1px solid var(--border);
     padding: 20px 12px;
+    min-width: 0;
+}
+
+.dashboard-main {
+    min-width: 0;
 }
 
 .side-logo {
@@ -886,6 +921,16 @@ section {
     color: var(--accent);
     padding: 12px;
     margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.side-logo i,
+.side-link i {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
 }
 
 .side-link {
@@ -896,6 +941,13 @@ section {
     display: flex;
     align-items: center;
     gap: 10px;
+    width: 100%;
+    background: transparent;
+    border: 0;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background .2s ease, color .2s ease;
 }
 
 .side-link.active,
@@ -1011,6 +1063,163 @@ section {
     color: white;
 }
 
+/* Dashboard: hamburger menu + switchable views */
+
+.dash-menu-btn {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 9px 14px;
+    cursor: pointer;
+    transition: border-color .2s ease, color .2s ease;
+}
+
+.dash-menu-btn:hover,
+.dash-menu-btn:focus-visible {
+    border-color: var(--accent);
+    color: var(--accent-light);
+    outline: none;
+}
+
+.dash-burger {
+    position: relative;
+    width: 16px;
+    height: 12px;
+    display: inline-block;
+}
+
+.dash-burger span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform .3s ease, opacity .2s ease, top .3s ease;
+}
+
+.dash-burger span:nth-child(1) { top: 0; }
+.dash-burger span:nth-child(2) { top: 5px; }
+.dash-burger span:nth-child(3) { top: 10px; }
+
+.dashboard.menu-open .dash-burger span:nth-child(1) { top: 5px; transform: rotate(45deg); }
+.dashboard.menu-open .dash-burger span:nth-child(2) { opacity: 0; }
+.dashboard.menu-open .dash-burger span:nth-child(3) { top: 5px; transform: rotate(-45deg); }
+
+.dash-backdrop {
+    display: none;
+}
+
+.dash-view {
+    display: none;
+}
+
+.dash-view.active {
+    display: block;
+    animation: dashFade .35s ease;
+}
+
+@keyframes dashFade {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+}
+
+.dash-view:not(#view-overview) .panel {
+    margin-top: 20px;
+}
+
+.dash-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.dash-row:last-child {
+    border-bottom: 0;
+}
+
+.dash-row-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.dash-row-info strong {
+    display: block;
+    font-size: 12px;
+    color: white;
+    font-weight: 600;
+}
+
+.dash-row-info span {
+    display: block;
+    margin-top: 3px;
+    font-size: 10px;
+    color: var(--muted);
+}
+
+.dash-row-meta {
+    font-size: 11px;
+    color: var(--accent-light);
+    white-space: nowrap;
+}
+
+.chip {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    padding: 5px 9px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+.chip.ok { color: #8fd3a8; border-color: rgba(143,211,168,.35); }
+.chip.warn { color: var(--accent-light); border-color: rgba(201,166,107,.45); }
+.chip.info { color: #9db8e8; border-color: rgba(157,184,232,.35); }
+
+.dash-avatar {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--surface-2);
+    border: 1px solid var(--accent);
+    color: var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.dash-projects {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.dash-projects .panel {
+    margin-top: 0;
+}
+
+.dash-projects .panel h4 {
+    margin-bottom: 6px;
+}
+
+.dash-projects .panel > p {
+    font-size: 10px;
+    color: var(--muted);
+    margin-bottom: 16px;
+}
+
 /* ================= PROCESS ================= */
 
 .process {
@@ -1022,29 +1231,37 @@ section {
 
 .process-step {
     padding: 28px;
-    min-height: 190px;
+    min-height: 260px;
     border-right: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
 }
 
 .step-no {
+    display: block;
     color: var(--accent);
-    font-size: 11px;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 34px;
 }
 
 .process-step i {
+    display: block;
     color: var(--accent-light);
-    margin: 28px 0 15px;
+    width: 34px;
+    height: 34px;
+    margin: 0 0 22px;
 }
 
 .process-step h3 {
-    font-size: 15px;
+    font-size: 21px;
+    margin-bottom: 4px;
 }
 
 .process-step p {
     color: var(--muted);
-    font-size: 11px;
-    line-height: 1.6;
+    font-size: 15px;
+    line-height: 1.65;
     margin-top: 8px;
 }
 
@@ -1142,8 +1359,87 @@ footer {
     padding-top: 22px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: 14px;
     color: #686a6c;
     font-size: 10px;
+}
+
+.social-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+}
+
+.footer-col .social-links a,
+.social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    margin: 0;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--muted);
+    background: var(--surface);
+    transition: .3s;
+}
+
+.social-links a svg {
+    width: 17px;
+    height: 17px;
+    fill: currentColor;
+}
+
+.social-links a:hover {
+    color: #17130d;
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(201,166,107,.28);
+}
+
+/* ================= BACK TO TOP ================= */
+
+.back-to-top {
+    position: fixed;
+    right: 26px;
+    bottom: 26px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,166,107,.5);
+    background: rgba(18,20,22,.88);
+    backdrop-filter: blur(14px);
+    color: var(--accent-light);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    z-index: 900;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(16px);
+    transition: opacity .35s ease, transform .35s ease, visibility .35s, background .3s, color .3s;
+    box-shadow: 0 10px 25px rgba(0,0,0,.45);
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: var(--accent);
+    color: #17130d;
+    transform: translateY(-4px);
+}
+
+.back-to-top svg {
+    width: 20px;
+    height: 20px;
 }
 
 /* ================= MODAL ================= */
@@ -1371,6 +1667,79 @@ footer {
     .network-item:nth-child(2n) {
         border-right: 0;
     }
+
+    /* Dashboard: hamburger menu opens side menu drawer on tablet & mobile */
+    .dashboard {
+        position: relative;
+    }
+
+    .dash-menu-btn {
+        display: inline-flex;
+    }
+
+    .dashboard-dots {
+        display: none;
+    }
+
+    .dashboard-body {
+        grid-template-columns: 1fr;
+        min-height: 430px;
+    }
+
+    .dashboard-side {
+        position: absolute;
+        top: 58px;
+        left: 0;
+        bottom: 0;
+        width: 250px;
+        max-width: 82%;
+        background: #0c0e0f;
+        z-index: 30;
+        overflow-y: auto;
+        padding: 20px 12px;
+        transform: translateX(-102%);
+        visibility: hidden;
+        transition: transform .3s ease, visibility 0s linear .3s;
+    }
+
+    .dashboard.menu-open .dashboard-side {
+        transform: none;
+        visibility: visible;
+        box-shadow: 20px 0 50px rgba(0,0,0,.5);
+        transition: transform .3s ease, visibility 0s;
+    }
+
+    .dash-backdrop {
+        display: block;
+        position: absolute;
+        top: 58px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,.55);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .3s ease;
+        z-index: 25;
+    }
+
+    .dashboard.menu-open .dash-backdrop {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .dashboard-panels {
+        grid-template-columns: 1fr;
+    }
+
+    .dash-projects {
+        grid-template-columns: 1fr;
+    }
+
+    .side-link {
+        font-size: 13px;
+        padding: 14px 12px;
+    }
 }
 
 @media(max-width: 650px) {
@@ -1458,12 +1827,26 @@ footer {
         grid-template-columns: 1fr;
     }
 
+    /* Dashboard: side menu is a hamburger drawer on mobile */
     .dashboard-body {
-        grid-template-columns: 1fr;
+        min-height: 400px;
     }
 
-    .dashboard-side {
-        display: none;
+    .dashboard-top {
+        padding: 0 14px;
+    }
+
+    .side-link i {
+        width: 18px;
+        height: 18px;
+    }
+
+    .dash-row {
+        flex-wrap: wrap;
+    }
+
+    .dashboard-main {
+        padding: 16px;
     }
 
     .dashboard-cards {
@@ -1474,12 +1857,22 @@ footer {
         grid-template-columns: 1fr;
     }
 
-    .dashboard {
-        overflow-x: auto;
+    .dashboard-user {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 70%;
     }
 
-    .dashboard-body {
-        min-width: 650px;
+    .contract-card h3 {
+        font-size: 20px;
+    }
+
+    .back-to-top {
+        right: 16px;
+        bottom: 16px;
+        width: 44px;
+        height: 44px;
     }
 
     .footer-grid {
@@ -1549,6 +1942,35 @@ footer {
     .mobile-nav-buttons .btn {
         padding: 10px 14px;
         font-size: 11px;
+    }
+
+    .dashboard-side {
+        width: 230px;
+    }
+
+    .dash-menu-btn {
+        padding: 8px 11px;
+    }
+
+    .dashboard-main {
+        padding: 12px;
+    }
+
+    .dash-card {
+        padding: 12px;
+    }
+
+    .dash-card strong {
+        font-size: 20px;
+    }
+
+    .dashboard-heading h3 {
+        font-size: 17px;
+    }
+
+    .process-step {
+        padding: 24px;
+        min-height: 0;
     }
 }
 </style>
@@ -2111,7 +2533,7 @@ footer {
     </p>
     <a href="#" class="contract-link" onclick="openContract(event,'Manufacturing Agreement')">
         View Template
-        <i data-lucide="arrow-up-right" style="width:13px"></i>
+        <i data-lucide="arrow-up-right"></i>
     </a>
 </div>
 
@@ -2124,7 +2546,7 @@ footer {
     </p>
     <a href="#" class="contract-link" onclick="openContract(event,'Supplier Agreement')">
         View Template
-        <i data-lucide="arrow-up-right" style="width:13px"></i>
+        <i data-lucide="arrow-up-right"></i>
     </a>
 </div>
 
@@ -2137,7 +2559,7 @@ footer {
     </p>
     <a href="#" class="contract-link" onclick="openContract(event,'Sponsorship Agreement')">
         View Template
-        <i data-lucide="arrow-up-right" style="width:13px"></i>
+        <i data-lucide="arrow-up-right"></i>
     </a>
 </div>
 
@@ -2150,6 +2572,7 @@ footer {
     </p>
     <a href="#" class="contract-link" onclick="openContract(event,'Non-Disclosure Agreement')">
         View Template
+        <i data-lucide="arrow-up-right"></i>
     </a>
 </div>
 
@@ -2162,6 +2585,7 @@ footer {
     </p>
     <a href="#" class="contract-link" onclick="openContract(event,'Distribution Agreement')">
         View Template
+        <i data-lucide="arrow-up-right"></i>
     </a>
 </div>
 
@@ -2174,6 +2598,7 @@ footer {
     </p>
     <a href="#" class="contract-link" onclick="openContract(event,'Custom Agreement')">
         Create Template
+        <i data-lucide="arrow-up-right"></i>
     </a>
 </div>
 
@@ -2211,6 +2636,11 @@ footer {
 
 <div class="dashboard-top">
 
+    <button type="button" class="dash-menu-btn" id="dashMenuBtn" aria-label="Open workspace menu" aria-expanded="false" aria-controls="dashSide">
+        <span class="dash-burger" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span>Menu</span>
+    </button>
+
     <div class="dashboard-dots">
         <span></span>
         <span></span>
@@ -2225,45 +2655,50 @@ footer {
 
 <div class="dashboard-body">
 
-<aside class="dashboard-side">
+<aside class="dashboard-side" id="dashSide">
 
     <div class="side-logo">
-        THREADVAULT
+        <i data-lucide="layers"></i>
+        <span class="side-text">THREADVAULT</span>
     </div>
 
-    <div class="side-link active">
+    <button type="button" class="side-link active" data-view="overview" data-title="Enterprise Overview" title="Overview">
         <i data-lucide="layout-dashboard"></i>
-        Overview
-    </div>
+        <span class="side-text">Overview</span>
+    </button>
 
-    <div class="side-link">
+    <button type="button" class="side-link" data-view="partnerships" data-title="Partnerships" title="Partnerships">
         <i data-lucide="handshake"></i>
-        Partnerships
-    </div>
+        <span class="side-text">Partnerships</span>
+    </button>
 
-    <div class="side-link">
+    <button type="button" class="side-link" data-view="contracts" data-title="Contracts" title="Contracts">
         <i data-lucide="file-text"></i>
-        Contracts
-    </div>
+        <span class="side-text">Contracts</span>
+    </button>
 
-    <div class="side-link">
+    <button type="button" class="side-link" data-view="team" data-title="Team" title="Team">
         <i data-lucide="users"></i>
-        Team
-    </div>
+        <span class="side-text">Team</span>
+    </button>
 
-    <div class="side-link">
+    <button type="button" class="side-link" data-view="projects" data-title="Projects" title="Projects">
         <i data-lucide="folder"></i>
-        Projects
-    </div>
+        <span class="side-text">Projects</span>
+    </button>
 
 </aside>
+
+<div class="dash-backdrop" id="dashBackdrop"></div>
 
 <main class="dashboard-main">
 
     <div class="dashboard-heading">
-        <h3>Enterprise Overview</h3>
+        <h3 id="dashTitle">Enterprise Overview</h3>
         <span>October 2026</span>
     </div>
+
+    <div class="dash-view active" id="view-overview">
 
     <div class="dashboard-cards">
 
@@ -2371,6 +2806,135 @@ footer {
 
         </div>
 
+    </div>
+
+    </div>
+
+    <!-- Partnerships view -->
+    <div class="dash-view" id="view-partnerships">
+        <div class="panel">
+            <h4>Active Partnerships</h4>
+
+            <div class="dash-row">
+                <div class="dash-avatar">AM</div>
+                <div class="dash-row-info"><strong>Apex Manufacturing</strong><span>Garment manufacturing &middot; Tirupur</span></div>
+                <span class="chip ok">Active</span>
+            </div>
+            <div class="dash-row">
+                <div class="dash-avatar">LT</div>
+                <div class="dash-row-info"><strong>Lumi&egrave;re Textiles</strong><span>Premium fabric supplier &middot; Milan</span></div>
+                <span class="chip warn">Negotiation</span>
+            </div>
+            <div class="dash-row">
+                <div class="dash-avatar">OT</div>
+                <div class="dash-row-info"><strong>Orchid Trims &amp; Labels</strong><span>Trims &amp; packaging &middot; Dhaka</span></div>
+                <span class="chip info">Discovery</span>
+            </div>
+            <div class="dash-row">
+                <div class="dash-avatar">MX</div>
+                <div class="dash-row-info"><strong>Meridian Logistics</strong><span>Freight &amp; fulfilment &middot; Dubai</span></div>
+                <span class="chip ok">Active</span>
+            </div>
+            <div class="dash-row">
+                <div class="dash-avatar">KD</div>
+                <div class="dash-row-info"><strong>Kora Denim Works</strong><span>Denim specialist &middot; Istanbul</span></div>
+                <span class="chip warn">Onboarding</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contracts view -->
+    <div class="dash-view" id="view-contracts">
+        <div class="panel">
+            <h4>Contract Register</h4>
+
+            <div class="dash-row">
+                <div class="dash-row-info"><strong>Master Supply Agreement</strong><span>Apex Manufacturing &middot; Renews Mar 2027</span></div>
+                <span class="dash-row-meta">$1.2M</span>
+                <span class="chip ok">Signed</span>
+            </div>
+            <div class="dash-row">
+                <div class="dash-row-info"><strong>Fabric Sourcing Contract</strong><span>Lumi&egrave;re Textiles &middot; Draft v3</span></div>
+                <span class="dash-row-meta">$640K</span>
+                <span class="chip warn">In Review</span>
+            </div>
+            <div class="dash-row">
+                <div class="dash-row-info"><strong>Mutual NDA</strong><span>Orchid Trims &amp; Labels</span></div>
+                <span class="dash-row-meta">&mdash;</span>
+                <span class="chip info">Sent</span>
+            </div>
+            <div class="dash-row">
+                <div class="dash-row-info"><strong>Logistics Service Agreement</strong><span>Meridian Logistics &middot; Expires Dec 2026</span></div>
+                <span class="dash-row-meta">$310K</span>
+                <span class="chip ok">Signed</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team view -->
+    <div class="dash-view" id="view-team">
+        <div class="panel">
+            <h4>Team Members &middot; 12 seats</h4>
+
+            <div class="dash-row">
+                <div class="dash-avatar">SR</div>
+                <div class="dash-row-info"><strong>Sana Rahman</strong><span>Head of Sourcing</span></div>
+                <span class="chip ok">Admin</span>
+            </div>
+            <div class="dash-row">
+                <div class="dash-avatar">DK</div>
+                <div class="dash-row-info"><strong>Daniel Koh</strong><span>Legal &amp; Compliance</span></div>
+                <span class="chip info">Editor</span>
+            </div>
+            <div class="dash-row">
+                <div class="dash-avatar">PN</div>
+                <div class="dash-row-info"><strong>Priya Nair</strong><span>Operations Manager</span></div>
+                <span class="chip info">Editor</span>
+            </div>
+            <div class="dash-row">
+                <div class="dash-avatar">LB</div>
+                <div class="dash-row-info"><strong>Lucas Bernard</strong><span>Merchandising</span></div>
+                <span class="chip">Viewer</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects view -->
+    <div class="dash-view" id="view-projects">
+        <div class="dash-projects">
+            <div class="panel">
+                <h4>Autumn/Winter Capsule</h4>
+                <p>Apex Manufacturing &middot; Due Nov 2026</p>
+                <div class="progress-row">
+                    <div class="progress-top"><span>Progress</span><span>68%</span></div>
+                    <div class="progress"><span style="width:68%"></span></div>
+                </div>
+            </div>
+            <div class="panel">
+                <h4>Sustainable Fabric Line</h4>
+                <p>Lumi&egrave;re Textiles &middot; Due Jan 2027</p>
+                <div class="progress-row">
+                    <div class="progress-top"><span>Progress</span><span>41%</span></div>
+                    <div class="progress"><span style="width:41%"></span></div>
+                </div>
+            </div>
+            <div class="panel">
+                <h4>Packaging Refresh</h4>
+                <p>Orchid Trims &middot; Due Dec 2026</p>
+                <div class="progress-row">
+                    <div class="progress-top"><span>Progress</span><span>23%</span></div>
+                    <div class="progress"><span style="width:23%"></span></div>
+                </div>
+            </div>
+            <div class="panel">
+                <h4>Denim Collaboration</h4>
+                <p>Kora Denim Works &middot; Due Feb 2027</p>
+                <div class="progress-row">
+                    <div class="progress-top"><span>Progress</span><span>85%</span></div>
+                    <div class="progress"><span style="width:85%"></span></div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </main>
@@ -2548,6 +3112,24 @@ footer {
         business partnerships, contracts and collaboration.
     </p>
 
+    <div class="social-links">
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://x.com/" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" title="X">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+    </div>
+
 </div>
 
 <div class="footer-col">
@@ -2598,6 +3180,12 @@ footer {
 </div>
 
 </footer>
+
+<!-- ================= BACK TO TOP ================= -->
+
+<button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" title="Back to top">
+    <i data-lucide="arrow-up"></i>
+</button>
 
 <!-- ================= MODAL ================= -->
 
@@ -2869,6 +3457,62 @@ document.addEventListener("keydown", e => {
     }
 
 });
+
+/* ================= BACK TO TOP ================= */
+
+const backToTopBtn = document.getElementById("backToTop");
+
+function toggleBackToTop() {
+    backToTopBtn.classList.toggle("show", window.scrollY > 500);
+}
+
+window.addEventListener("scroll", toggleBackToTop, { passive: true });
+toggleBackToTop();
+
+backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+/* ================= DASHBOARD MENU & VIEWS ================= */
+
+(function () {
+
+    const dash = document.querySelector(".dashboard");
+    if (!dash) return;
+
+    const menuBtn = document.getElementById("dashMenuBtn");
+    const backdrop = document.getElementById("dashBackdrop");
+    const title = document.getElementById("dashTitle");
+    const links = dash.querySelectorAll(".side-link[data-view]");
+    const views = dash.querySelectorAll(".dash-view");
+
+    function setMenu(open) {
+        dash.classList.toggle("menu-open", open);
+        menuBtn.setAttribute("aria-expanded", String(open));
+        menuBtn.setAttribute("aria-label", open ? "Close workspace menu" : "Open workspace menu");
+    }
+
+    menuBtn.addEventListener("click", () => setMenu(!dash.classList.contains("menu-open")));
+    backdrop.addEventListener("click", () => setMenu(false));
+
+    links.forEach(link => {
+        link.addEventListener("click", () => {
+            links.forEach(l => l.classList.toggle("active", l === link));
+            views.forEach(v => v.classList.toggle("active", v.id === "view-" + link.dataset.view));
+            title.textContent = link.dataset.title;
+            setMenu(false);
+        });
+    });
+
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape") setMenu(false);
+    });
+
+    window.addEventListener("resize", () => {
+        if (window.innerWidth > 768) setMenu(false);
+    });
+
+})();
 
 </script>
 
